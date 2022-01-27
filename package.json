@@ -1,6 +1,6 @@
 {
   "name": "sota-web3-react",
-  "version": "1.0.1",
+  "version": "1.0.0",
   "description": "The package use web3react library to custom features for using more easily in the future.",
   "main": "dist/index.js",
   "types": "dist/types/index.d.ts",
