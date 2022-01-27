@@ -1,0 +1,37 @@
+{
+  "name": "sota-web3-react",
+  "version": "1.0.0",
+  "description": "The package use web3react library to custom features for using more easily in the future.",
+  "main": "src/index.ts",
+  "scripts": {
+    "postinstall": "rm -rf .husky && husky install && npx husky add .husky/pre-commit \"npx lint-staged\"",
+    "lint": "eslint \"**/*.{ts,tsx}\"",
+    "format": "prettier --write \"**/*.+(js|ts|json|md)\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sotatek-PhuongNguyen4/sota-web3-react.git"
+  },
+  "keywords": [
+    "sota-web3-react"
+  ],
+  "author": "AdrienNguyen",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Sotatek-PhuongNguyen4/sota-web3-react/issues"
+  },
+  "homepage": "https://github.com/Sotatek-PhuongNguyen4/sota-web3-react#readme",
+  "lint-staged": {
+    "*.+(js|ts)": "eslint --max-warnings 0 --fix",
+    "*.+(js|ts|json|md)": "prettier --write"
+  },
+  "devDependencies": {
+    "@types/node": "^17.0.12",
+    "@typescript-eslint/eslint-plugin": "^5.10.1",
+    "eslint": "^8.7.0",
+    "husky": "^7.0.4",
+    "lint-staged": "^12.3.2",
+    "prettier": "^2.5.1"
+  }
+}
