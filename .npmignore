@@ -1,1 +1,9 @@
 .husky
+.eslintignore
+.eslintrc.js
+.gitignore
+.prettierignore
+.prettierrc.json
+.tsconfig.json
+package-lock.json
+src

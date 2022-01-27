@@ -3,6 +3,9 @@ import { WalletConnectConnector } from "@web3-react/walletconnect-connector";
 import { AbstractConnector } from "@web3-react/abstract-connector";
 import { useWeb3React } from "@web3-react/core";
 import { SotaWeb3ReactProviderElement } from "./provider";
+import { useState, useEffect } from "react";
+import { formatEther } from "@ethersproject/units";
+
 export class SotaMetamaskConnector extends InjectedConnector {}
 
 export class SotaWalletConnectConnector extends WalletConnectConnector {}
@@ -10,7 +13,8 @@ export class SotaWalletConnectConnector extends WalletConnectConnector {}
 export const SotaWeb3ReactProvider = SotaWeb3ReactProviderElement as any;
 
 export const useSotaWeb3React = () => {
-  const { activate, account, chainId, deactivate, error } = useWeb3React();
+  const { activate, account, chainId, deactivate, error, library, connector } =
+    useWeb3React();
 
   const tryActivate = async (connector: AbstractConnector) => {
     if (!window.ethereum && connector instanceof SotaMetamaskConnector) {
@@ -32,6 +36,32 @@ export const useSotaWeb3React = () => {
         });
   };
 
+  const [balance, setBalance] = useState();
+  useEffect(() => {
+    if (!!account && !!library) {
+      let stale = false;
+      library
+        .getBalance(account)
+        .then((balance: any) => {
+          if (!stale) {
+            setBalance(balance);
+          }
+        })
+        .catch(() => {
+          if (!stale) {
+            setBalance(undefined);
+          }
+        });
+
+      return () => {
+        stale = true;
+        setBalance(undefined);
+      };
+    }
+  }, [account, library, chainId]);
+
+  const formatAmountToken = formatEther;
+
   return {
     activate,
     deactivate,
@@ -39,5 +69,9 @@ export const useSotaWeb3React = () => {
     chainId,
     error,
     tryActivate,
+    library,
+    connector,
+    balance,
+    formatAmountToken,
   };
 };

@@ -1,11 +1,11 @@
 {
-  "name": "sota-web3-react",
-  "version": "1.0.0",
+  "name": "sota-web3-react-test-1",
+  "version": "1.0.1",
   "description": "The package use web3react library to custom features for using more easily in the future.",
   "main": "dist/index.js",
   "types": "dist/types/index.d.ts",
   "scripts": {
-    "postinstall": "rm -rf .husky && husky install && npx husky add .husky/pre-commit \"npx lint-staged\"",
+    "husky": "rm -rf .husky && husky install && npx husky add .husky/pre-commit \"npx lint-staged\"",
     "lint": "eslint \"**/*.{ts,tsx}\"",
     "format": "prettier --write \"**/*.+(js|ts|json|md)\"",
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -41,6 +41,7 @@
   },
   "dependencies": {
     "@ethersproject/experimental": "^5.5.0",
+    "@ethersproject/units": "^5.5.0",
     "@web3-react/core": "^6.1.9",
     "@web3-react/injected-connector": "^6.0.7",
     "@web3-react/walletconnect-connector": "^6.2.10",
