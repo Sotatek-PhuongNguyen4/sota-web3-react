@@ -5,6 +5,7 @@ import { useWeb3React } from "@web3-react/core";
 import { SotaWeb3ReactProviderElement } from "./provider";
 import { useState, useEffect } from "react";
 import { formatEther } from "@ethersproject/units";
+import { ethers } from "ethers";
 
 export class SotaMetamaskConnector extends InjectedConnector {}
 
@@ -62,6 +63,28 @@ export const useSotaWeb3React = () => {
 
   const formatAmountToken = formatEther;
 
+  const signMessage = async (message: string) => {
+    try {
+      const provider = new ethers.providers.Web3Provider(
+        await connector?.getProvider()
+      );
+      const signer = provider.getSigner();
+      const signature = await signer.signMessage(message);
+      const address = await signer.getAddress();
+
+      return {
+        message,
+        signature,
+        address,
+        error: null,
+      };
+    } catch (error) {
+      return {
+        error,
+      };
+    }
+  };
+
   return {
     activate,
     deactivate,
@@ -73,5 +96,6 @@ export const useSotaWeb3React = () => {
     connector,
     balance,
     formatAmountToken,
+    signMessage,
   };
 };
